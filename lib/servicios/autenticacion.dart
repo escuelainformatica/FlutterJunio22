@@ -10,7 +10,7 @@ class Autenticacion {
   static String level='';
   static String tokenBear='';
 
-  static Future<bool> login(String user,String password) async {
+  static Future<bool> login(String user,String password,bool? recordar) async {
     // This example uses the Google Books API to search for books about http.
     // https://developers.google.com/books/docs/overview
     //http://158.101.30.194/testcli/examples/oraclevm2/api/User/createauth
@@ -32,6 +32,7 @@ class Autenticacion {
       String tokenBear=response.headers['token']??'';
       Autenticacion.usuario=webToken.body!.userName??'Sin usuario';
       prefs.setString('usuario',Autenticacion.usuario );
+      prefs.setBool('recordar', recordar??false);
       Autenticacion.level=webToken.body!.level??'Sin nivel';
       prefs.setString('level', level);
       Autenticacion.level=tokenBear;
